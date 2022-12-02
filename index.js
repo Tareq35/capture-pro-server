@@ -71,6 +71,20 @@ async function run(){
             res.send(services);
         })
 
+        // Uniq Service for Uniq Data------------------------------------------------------------>
+        app.get('/services/:id', async(req, res)=>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await serviceCollection.findOne(query);
+            res.send(result);
+        })
+
+        app.post("/review", async(req, res)=>{
+            const review = req.body;
+            const result = await reviewCollection.insertOne(review);
+            res.send(result);
+        })
+
         
 
     }
