@@ -49,6 +49,14 @@ async function run(){
             res.send({token});
         })
 
+        // Home Page Display Services-------------------------------------------------->
+        app.get('/service', async(req, res)=>{
+            const query = {};
+            const cursor = serviceCollection.find(query);
+            const services = await cursor.sort({"date": -1}).limit(3).toArray();
+            res.send(services);
+        })
+
         
 
     }
