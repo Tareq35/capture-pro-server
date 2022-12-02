@@ -37,6 +37,18 @@ function verifyJWT(req, res, next) {
 
 async function run(){
     try{
+        const serviceCollection = client.db("userReview").collection('services');
+        const reviewCollection = client.db("userReview").collection("reviews");
+
+        // JSON Web Token
+        app.post("/jwt", (req, res)=>{
+            const user = req.body;
+            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+              expiresIn: "1d",
+            });
+            res.send({token});
+        })
+
         
 
     }
