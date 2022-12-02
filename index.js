@@ -37,8 +37,8 @@ function verifyJWT(req, res, next) {
 
 async function run(){
     try{
-        const serviceCollection = client.db("userReview").collection('services');
-        const reviewCollection = client.db("userReview").collection("reviews");
+        const serviceCollection = client.db("capturePro").collection('services');
+        const reviewCollection = client.db("capturePro").collection("reviews");
 
         // JSON Web Token
         app.post("/jwt", (req, res)=>{
