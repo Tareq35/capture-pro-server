@@ -98,6 +98,25 @@ async function run(){
             res.send(reviews);
         })
 
+        // Get My Review With Email Query--------------------------------->
+        app.get("/myReview", verifyJWT, async(req, res)=>{
+            const decoded = req.decoded;
+            console.log(decoded);
+            if (decoded.email !== req.query.email) {
+              return res.status(403).send({ message: "Unauthorized Access" });
+            }
+            
+            let query = {};
+            if(req.query.email){
+                query = {
+                    email : req.query.email
+                }
+            }
+            const cursor = reviewCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result)
+        })
+
         
 
     }
