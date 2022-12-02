@@ -124,6 +124,22 @@ async function run(){
           res.send(result);
         });
 
+        // Update Review Here------------------------------------------------>
+        app.put("/update/:id", async(req, res)=>{
+          const id = req.params.id;
+          const query = {_id: ObjectId(id)};
+          const review = req.body;
+          const option = {upsert : true};
+          const updateReview = {
+            $set: {
+              name :review.name,
+              comment : review.comment
+            },
+          };
+          const result = await reviewCollection.updateOne(query, updateReview, option);
+          res.send(result);
+        })
+
         
 
     }
