@@ -64,6 +64,13 @@ async function run(){
             res.send(result);
         })
 
+        app.get('/services', async(req, res)=>{
+            const query = {};
+            const cursor = serviceCollection.find(query);
+            const services = await cursor.sort({"date": -1}).toArray();
+            res.send(services);
+        })
+
         
 
     }
